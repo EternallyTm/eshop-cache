@@ -23,12 +23,12 @@ public class CacheTestController {
 
     @RequestMapping("/saveProductInfo")
     public String saveProductInfo(ProductInfo productInfo){
-        cacheService.saveProductInfo(productInfo);
+        cacheService.saveProductInfo2LocalCache(productInfo);
         return "success";
     }
 
     @RequestMapping("/getProductInfo")
     public ProductInfo getProductInfo(Long id) {
-        return cacheService.findById(id);
+        return cacheService.getProductInfoFromLocalCache(id);
     }
 }

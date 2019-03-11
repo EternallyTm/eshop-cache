@@ -1,11 +1,13 @@
 package com.wangx.eshop.cache;
 
+import com.wangx.eshop.cache.listener.InitListener;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.context.embedded.ServletListenerRegistrationBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -54,6 +56,16 @@ public class EshopCacheApplication {
         return jedisCluster;
     }
 
+    /**
+     * 创建系统监听器Bean
+     * @return
+     */
+    @Bean
+    public ServletListenerRegistrationBean servletListenerRegistrationBean () {
+        ServletListenerRegistrationBean servletListenerRegistrationBean = new ServletListenerRegistrationBean();
+        servletListenerRegistrationBean.setListener(new InitListener());
+        return servletListenerRegistrationBean;
+    }
     /**
      * spring boot application 项目启动方法
      * @author wangx

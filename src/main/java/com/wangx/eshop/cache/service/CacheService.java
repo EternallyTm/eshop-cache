@@ -1,6 +1,7 @@
 package com.wangx.eshop.cache.service;
 
 import com.wangx.eshop.cache.model.ProductInfo;
+import com.wangx.eshop.cache.model.ShopInfo;
 
 /**
  *
@@ -18,12 +19,38 @@ public interface CacheService {
      * @param productInfo
      * @return
      */
-   ProductInfo saveProductInfo(ProductInfo productInfo);
+   ProductInfo saveProductInfo2LocalCache(ProductInfo productInfo);
+
+    /**
+     * 将商品信息保存到redis中
+     * @param productInfo
+     */
+   void saveProductInfo2RedisCache(ProductInfo productInfo);
+
+    /**
+     * 将店铺信息保存到本地ehcache缓存中
+     * @param shopInfo
+     * @return
+     */
+    ShopInfo saveShopInfo2LocalCache(ShopInfo shopInfo);
+    /**
+     * 将店铺信息保存到本地ehcache缓存中
+     * @param shopInfo
+     * @return
+     */
+    void saveShopInfo2RedisCache(ShopInfo shopInfo);
 
     /**
      * 根据ID从缓存中获取商品信息
      * @param id
      * @return
      */
-   ProductInfo findById(Long id);
+    ProductInfo getProductInfoFromLocalCache(Long id);
+
+    /**
+     * 根据店铺id从本地缓存中拿到店铺信息
+     * @param id
+     * @return
+     */
+    ShopInfo getShopInfoFromLocalCache(Long id);
 }
